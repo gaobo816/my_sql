@@ -1,0 +1,28 @@
+主键冲突错误NEWID() 
+
+3.4.2.8zxaj报主键冲突的错误，报错内容如下： 2016-05-09 08:34:57,126 [Runtime:92]-[INFO] 导入文件失败，重试一次。
+[任务编号]:048080cb543ce7c2015492f031fb2434 [数据类型]:npfy_zx [文件名称]:npfy_zx_0484818e547e36dc015492e93fcb24ca 
+2016-05-09 08:34:58,236 [Runtime:77]-[ERROR] 执行案件sql失败 org.springframework.dao.DataIntegrityViolationException: 
+StatementCallback; SQL []; 试图用唯一的索引'I_PK_C_BH'给对象'T_ZX_ZXYAJ'插入重复键行 ; 
+nested exception is SQLException: 
+试图用唯一的索引'I_PK_C_BH'给对象'T_ZX_ZXYAJ'插入重复键行 
+at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate
+(SQLErrorCodeSQLExceptionTranslator.java:228) at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.
+translate(AbstractFallbackSQLExceptionTranslator.java:72) at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+atcom.thunisoft.ddts.handler.fy.importhandler.cases.CaseImportHandler.executeSqlAndUpdateEntity(CaseImportHandler.java:409) 
+at com.thunisoft.ddts.handler.fy.importhandler.cases.CaseImportHandler.process(CaseImportHandler.java:258) 
+at com.thunisoft.ddts.task.ImportTask.run(ImportTask.java:86)at java.util.concurrent.ThreadPoolExecutor$Worker.
+runTask(Unknown Source) at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)at java.lang.Thread.
+run(Unknown Source)Caused by: com.sybase.jdbc3.jdbc.SybSQLException: 试图用唯一的索引'I_PK_C_BH'给对象'T_ZX_ZXYAJ'插入重复键行 ? 
+
+第一步在ty数据库中查出报错案件的z原aj的编号 SELECT C_BH FROM T_ZX_ZXYAJ WHERE C_BH_AJ IN ( ............................ '689B3C9EDD1786FA6A72B010B394EF32' ) 结果如下：
+
+264AC07302A3FF432809FC0791F4E2E4 ?
+
+第二步sxgy中查询这些报错的案件是否上传没有确认没上传 SELECT * FROM T_ZX_AJ WHERE C_BH IN ( '58CDE062FC455C2E0308B7A991F03B90',  ) 查询无结果确认案件没上传。 ? 
+
+第三步在gy数据库中查询出冲突案件的编号案件，用zy的上次查询出的编号结果： SELECT * FROM T_ZX_ZXYAJ WHERE C_BH IN ( '264AC07302A3FF432809FC0791F4E2E4' ) ?
+
+第四步最后修改报错的c_bh,获取唯一编号后新的上传就不冲突，同时查看T_ZX_ZXYAJ的C_BH无关联外键，不需要其他处理
+
+UPDATE T_ZX_ZXYAJ SET C_BH=NEWID() WHERE C_BH='0D89B9FF2045F52B761898019C7F789E'
