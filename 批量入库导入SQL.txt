@@ -1,6 +1,6 @@
 
 
-µÚÒ»²½:´´½¨ÁÙÊ±±í
+ç¬¬ä¸€æ­¥:åˆ›å»ºä¸´æ—¶è¡¨
 
  
 T_Aty_UserExt4
@@ -25,23 +25,23 @@ C_LoginID VARCHAR (100) NULL,
 
 C_Name    VARCHAR (100) NULL,
 
-C_Sfz     VARCHAR (20) NULL
+C_Sf     VARCHAR (20) NULL
 
 )
 
 GO
 
-µÚ¶þ²½:Ê¹ÓÃexcelÉú³É²åÈëÓï¾äµ½ÖÐ¼ä±í¡£²åÈëÓÃ»§×¼±¸ºÃµÄÉí·ÝÖ¤ºÍÃû×Ö¡£
+ç¬¬äºŒæ­¥:ä½¿ç”¨excelç”Ÿæˆæ’å…¥è¯­å¥åˆ°ä¸­é—´è¡¨ã€‚æ’å…¥ç”¨æˆ·å‡†å¤‡å¥½çš„èº«ä»½è¯å’Œåå­—ã€‚
 
 INSERT INTO T_Aty_UserExt(C_ID,C_LoginID,C_Name) vlues()
 
-µÚÈý²½:½«ÓÃ»§ID ºÍC_LoginID£¬²åÈëµ½ÁÙÊ±±íÖÐ¡£
+ç¬¬ä¸‰æ­¥:å°†ç”¨æˆ·ID å’ŒC_LoginIDï¼Œæ’å…¥åˆ°ä¸´æ—¶è¡¨ä¸­ã€‚
 
-½¨cursor
+å»ºcursor
 
 DECLARE tt CURSOR FOR SELECT C_ID,C_LoginID,C_Name FROM T_Aty_UserExt
 
-µÚËÄ²½:²é³öµÄÊý¾ÝºÍÁÙÊ±±íÏàÍ¬µÄ×Ô¶¯»ñÈ¡ÐÅÏ¢¡£
+ç¬¬å››æ­¥:æŸ¥å‡ºçš„æ•°æ®å’Œä¸´æ—¶è¡¨ç›¸åŒçš„è‡ªåŠ¨èŽ·å–ä¿¡æ¯ã€‚
 
 DECLARE @id VARCHAR(100)
 
@@ -65,10 +65,10 @@ END
 
 CLOSE tt
 
-µÚÎå²½:ÏàÍ¬idµÄ¸ÄÎªÏàÍ¬µÄÉí·ÝÖ¤¡£
+ç¬¬äº”æ­¥:ç›¸åŒidçš„æ”¹ä¸ºç›¸åŒçš„sfzã€‚
 
  UPDATE T_Aty_UserExt  SET U.C_Sfz=U4.C_Sfz FROM T_Aty_UserExt U,T_Aty_UserExt4 U4 WHERE U.C_ID=U4.C_ID
 
-µÚÁù²½:²éÑ¯Ã»ÓÐµ¼ÈëµÄÐÅÏ¢
+ç¬¬å…­æ­¥:æŸ¥è¯¢æ²¡æœ‰å¯¼å…¥çš„ä¿¡æ¯
 
 SELECT C_ID,C_LoginID,C_Name FROM T_Aty_User WHERE C_ID NOT IN (SELECT C_ID FROM T_Aty_UserExt)
